@@ -17,15 +17,12 @@
             android:id="@+id/nav_chat_support"
             android:title="@string/chatbot_text"/>
     </group>
-        <group android:id="@+id/nav_bottom"
-            android:checkableBehavior="single">
-                <item
-                    android:title="@string/map_text"
-                    android:id="@+id/nav_map"
-                    />
-                <item
-                    android:title="@string/approx_production_text"
-                    android:id="@+id/nav_approx_production"
-                    />
-        </group>
+    <group android:id="@+id/nav_bottom" android:checkableBehavior="single">
+        <item
+            android:title="@string/map_text"
+            android:id="@+id/nav_map" />
+        <item
+            android:title="@string/approx_production_text"
+            android:id="@+id/nav_approx_production" />
+    </group>
 </menu>

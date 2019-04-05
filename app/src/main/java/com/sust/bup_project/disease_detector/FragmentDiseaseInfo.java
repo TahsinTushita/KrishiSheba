@@ -35,6 +35,14 @@ public class  FragmentDiseaseInfo extends Fragment {
 
     private ArrayList<Disease> diseases;
 
+
+    private static Fragment fragment;
+
+    public static Fragment getFragment() {
+        if(fragment == null) return fragment = new FragmentDiseaseInfo();
+        return fragment;
+    }
+
     @Override
     public void setArguments(@Nullable Bundle args) {
         super.setArguments(args);

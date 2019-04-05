@@ -53,6 +53,13 @@ public class FragmentDiseaseDetector extends Fragment {
     private File tempFile;
     private Bitmap bitmap;
 
+    private static Fragment fragment;
+
+    public static Fragment getFragment() {
+        if(fragment == null) return fragment = new FragmentDiseaseDetector();
+        return fragment;
+    }
+
     public int getRadioButtonState() {
         return radioButtonState;
     }

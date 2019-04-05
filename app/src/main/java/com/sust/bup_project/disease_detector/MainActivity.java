@@ -1,8 +1,6 @@
 package com.sust.bup_project.disease_detector;
 
-import android.content.res.AssetManager;
 import android.graphics.Bitmap;
-import android.graphics.Matrix;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
@@ -17,13 +15,12 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.google.firebase.FirebaseApp;
+import com.sust.bup_project.Calculator.RevenueCalculator;
 import com.sust.bup_project.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import tensorflow.Classifier;
-import tensorflow.TensorFlowImageClassifier;
 
 public class MainActivity extends AppCompatActivity implements FragmentDiseaseDetector.DiseaseDetectorListeners, DiseaseDetector.DiseaseDetectorListener {
 
@@ -42,7 +39,6 @@ public class MainActivity extends AppCompatActivity implements FragmentDiseaseDe
                 ,"android.permission.READ_EXTERNAL_STORAGE"
     };
 
-    private Classifier classifier;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +60,20 @@ public class MainActivity extends AppCompatActivity implements FragmentDiseaseDe
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 menuItem.setChecked(true);
                 drawer.closeDrawers();
+                switch (menuItem.getItemId()) {
+                    case R.id.nav_detect:
+                        if(!(fragment instanceof FragmentDiseaseDetector)) {
+                            fragment = FragmentDiseaseDetector.getFragment();
+                            getSupportFragmentManager().beginTransaction().replace(R.id.MainFragment, fragment).commit();
+                        }
+                        break;
+                    case R.id.nav_approx_production:
+                        if(!(fragment instanceof RevenueCalculator)) {
+                            fragment = RevenueCalculator.getFragment();
+                            getSupportFragmentManager().beginTransaction().replace(R.id.MainFragment, fragment).commit();
+                        }
+                        break;
+                }
                 return true;
             }
         });
@@ -93,13 +103,14 @@ public class MainActivity extends AppCompatActivity implements FragmentDiseaseDe
         getSupportFragmentManager().beginTransaction().replace(R.id.MainFragment,fragment).addToBackStack(null).commit();
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 drawer.openDrawer(GravityCompat.START);
                 return true;
-        }
+            }
         return super.onOptionsItemSelected(item);
     }
 

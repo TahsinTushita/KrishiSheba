@@ -18,9 +18,13 @@
         android:layout_height="1dp"
         android:background="@android:color/black"/>
     <TextView
-        android:text="TEST"
+        android:text="@string/my_location_text"
         android:padding="10dp"
         android:id="@+id/location_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/black"/>
 </LinearLayout>

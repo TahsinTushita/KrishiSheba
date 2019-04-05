@@ -26,10 +26,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-public class RevenueCalculator extends Fragment {
-
-
-    private FusedLocationProviderClient fusedLocationProviderClient;
+public class RevenueCalculator extends Fragment implements LocationFetcher.LocationListener {
     private static Fragment fragment;
 
     public static Fragment getFragment() {
@@ -43,20 +40,9 @@ public class RevenueCalculator extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context);
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-        }
-        fusedLocationProviderClient.getLastLocation().addOnSuccessListener((Activity) context, new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-                if (location != null) {
-                    currentLocation = getAddress(location.getLatitude(),location.getLongitude());
-                    locationTextView.setText(currentLocation);
-                }
-            }
-        });
-
+        this.context = context;
+        LocationFetcher fetcher = new LocationFetcher(getFragment(),context);
+        fetcher.run();
     }
 
     private TextView locationTextView;
@@ -69,21 +55,10 @@ public class RevenueCalculator extends Fragment {
         return view;
     }
 
-    private String getAddress(double latitude, double longitude) {
-        StringBuilder result = new StringBuilder();
-        try {
-            Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
-            List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
-            if (addresses.size() > 0) {
-                Address address = addresses.get(0);
-                result.append(address.getLocality()).append("\n");
-                result.append(address.getCountryName());
-            }
-        } catch (IOException e) {
-            Log.e("tag", e.getMessage());
-        }
 
-        return result.toString();
+
+    @Override
+    public void onThreadComplete(String currentLocation) {
+        locationTextView.setText(currentLocation);
     }
-
 }

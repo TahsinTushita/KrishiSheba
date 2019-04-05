@@ -15,4 +15,5 @@
     <string name="chatbot_text">ChatBot Support</string>
     <string name="map_text">Crops Map</string>
     <string name="approx_production_text">Approximate Production</string>
+    <string name="my_location_text">Current Location</string>
 </resources>

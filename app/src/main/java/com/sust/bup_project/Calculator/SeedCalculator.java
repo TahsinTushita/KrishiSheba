@@ -1,13 +1,8 @@
 package com.sust.bup_project.Calculator;
 
-import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -18,8 +13,7 @@ import android.widget.Toast;
 
 import com.sust.bup_project.R;
 
-
-public class SeedCalculatorFragment extends Fragment {
+public class SeedCalculator extends AppCompatActivity {
 
     Spinner cropsSpinner,unitSpinner;
     EditText unitEdittext;
@@ -29,35 +23,21 @@ public class SeedCalculatorFragment extends Fragment {
     Double size,result;
     String s,resultString;
 
-
-    private static Fragment fragment;
-
-    public static Fragment getFragment() {
-        if (fragment == null) return fragment = new SeedCalculatorFragment();
-        return fragment;
-    }
-
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        unitAdapter = ArrayAdapter.createFromResource(context,R.array.unit_list,android.R.layout.simple_spinner_dropdown_item);
-        cropsAdapter = ArrayAdapter.createFromResource(context,R.array.crops_list,android.R.layout.simple_spinner_dropdown_item);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_seed_calculator);
+
+        unitAdapter = ArrayAdapter.createFromResource(this,R.array.unit_list,android.R.layout.simple_spinner_dropdown_item);
+        cropsAdapter = ArrayAdapter.createFromResource(this,R.array.crops_list,android.R.layout.simple_spinner_dropdown_item);
         unitAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         cropsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_seed_calculator, container, false);
-
-        cropsSpinner = view.findViewById(R.id.cropSpinner);
-        unitSpinner = view.findViewById(R.id.unitSpinner);
-        unitEdittext = view.findViewById(R.id.landSizeText);
-        resultText = view.findViewById(R.id.resultText);
-        confirmbtn = view.findViewById(R.id.confirmbtn);
-        calcubtn = view.findViewById(R.id.calcubtn);
+        cropsSpinner = findViewById(R.id.cropSpinner);
+        unitSpinner = findViewById(R.id.unitSpinner);
+        unitEdittext = findViewById(R.id.landSizeText);
+        resultText = findViewById(R.id.resultText);
+        confirmbtn = findViewById(R.id.confirmbtn);
+        calcubtn = findViewById(R.id.calcubtn);
         unitSpinner.setAdapter(unitAdapter);
         cropsSpinner.setAdapter(cropsAdapter);
 
@@ -76,7 +56,7 @@ public class SeedCalculatorFragment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if(i==0){
                     size = size;
-                    Toast.makeText(getContext(),size.toString(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SeedCalculator.this,size.toString(),Toast.LENGTH_SHORT).show();
                 }
                 else if(i==1){
                     size = size*(0.01652853);
@@ -125,10 +105,6 @@ public class SeedCalculatorFragment extends Fragment {
             }
         });
 
-
-
-
-        return view;
     }
 
     public void getLandSize(){
@@ -140,7 +116,4 @@ public class SeedCalculatorFragment extends Fragment {
         resultString = result.toString();
         return resultString;
     }
-
-
-
 }

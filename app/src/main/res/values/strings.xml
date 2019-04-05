@@ -15,5 +15,19 @@
     <string name="chatbot_text">ChatBot Support</string>
     <string name="map_text">Crops Map</string>
     <string name="approx_production_text">Approximate Production</string>
-    <string name="my_location_text">Current Location</string>
+    <string name="seed_calculator_text">Seed Calculator</string>
+
+    <string-array name="crops_list">
+        <item>Potato</item>
+        <item>Tomato</item>
+        <item>Corn</item>
+    </string-array>
+
+    <string-array name="unit_list">
+        <item>Acre</item>
+        <item>Katha</item>
+        <item>Bigha</item>
+        <item>Shotok</item>
+        <item>Gonda</item>
+    </string-array>
 </resources>

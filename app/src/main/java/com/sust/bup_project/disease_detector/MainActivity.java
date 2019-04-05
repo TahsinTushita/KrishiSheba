@@ -16,6 +16,7 @@ import android.view.View;
 
 import com.google.firebase.FirebaseApp;
 import com.sust.bup_project.Calculator.RevenueCalculator;
+import com.sust.bup_project.Calculator.SeedCalculatorFragment;
 import com.sust.bup_project.R;
 
 import java.util.List;
@@ -72,6 +73,12 @@ public class MainActivity extends AppCompatActivity implements FragmentDiseaseDe
                     case R.id.nav_approx_production:
                         if(!(fragment instanceof RevenueCalculator)) {
                             fragment = RevenueCalculator.getFragment();
+                            getSupportFragmentManager().beginTransaction().replace(R.id.MainFragment, fragment).commit();
+                        }
+                        break;
+                    case R.id.nav_seed_calculator:
+                        if(!(fragment instanceof SeedCalculatorFragment)) {
+                            fragment = SeedCalculatorFragment.getFragment();
                             getSupportFragmentManager().beginTransaction().replace(R.id.MainFragment, fragment).commit();
                         }
                         break;

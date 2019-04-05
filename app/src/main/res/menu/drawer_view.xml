@@ -22,7 +22,7 @@
             android:title="@string/map_text"
             android:id="@+id/nav_map" />
         <item android:title="@string/seed_calculator_text"
-            android:id="@+id/nav_seed_calculator" />
+            android:id="@+id/seed_calculator" />
         <item
             android:title="@string/approx_production_text"
             android:id="@+id/nav_approx_production" />

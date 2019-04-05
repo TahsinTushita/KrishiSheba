@@ -1,5 +1,6 @@
 package com.sust.bup_project.disease_detector;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -18,6 +19,7 @@ import com.google.firebase.FirebaseApp;
 import com.sust.bup_project.Calculator.RevenueCalculator;
 import com.sust.bup_project.Calculator.SeedCalculatorFragment;
 import com.sust.bup_project.R;
+import com.sust.bup_project.map.MapActivity;
 
 import java.util.List;
 
@@ -76,11 +78,17 @@ public class MainActivity extends AppCompatActivity implements FragmentDiseaseDe
                             getSupportFragmentManager().beginTransaction().replace(R.id.MainFragment, fragment).commit();
                         }
                         break;
-                    case R.id.nav_seed_calculator:
+
+                    case R.id.seed_calculator:
                         if(!(fragment instanceof SeedCalculatorFragment)) {
                             fragment = SeedCalculatorFragment.getFragment();
                             getSupportFragmentManager().beginTransaction().replace(R.id.MainFragment, fragment).commit();
                         }
+                        break;
+
+                    case R.id.nav_map:
+                        Intent intent = new Intent(MainActivity.this, MapActivity.class);
+                        startActivity(intent);
                         break;
                 }
                 return true;

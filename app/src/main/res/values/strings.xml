@@ -17,6 +17,7 @@
     <string name="approx_production_text">Approximate Production</string>
     <string name="seed_calculator_text">Seed Calculator</string>
     <string name="my_location_text">Current Location</string>
+    <string name="available_seeds_text">Available Seeds</string>
 
     <string-array name="crops_list">
         <item>Potato</item>

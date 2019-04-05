@@ -2,21 +2,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".Calculator.RevenueCalculator">
-
+    <View
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/black" />
     <TextView
+        android:background="#fff"
         android:textStyle="bold"
         android:textColor="@android:color/black"
         android:text="@string/approx_production_text"
         android:padding="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:elevation="10dp"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@android:color/black"/>
+        android:background="@android:color/black" />
     <TextView
         android:text="@string/my_location_text"
         android:padding="10dp"
@@ -24,7 +31,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <View
+        android:elevation="10dp"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@android:color/black"/>
+    <TextView
+        android:background="#fff"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:elevation="10dp"
+        android:text="@string/available_seeds_text"
+        android:padding="10dp"
+        android:id="@+id/available_seeds_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <View
+        android:elevation="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/black"/>
+    <android.support.v7.widget.SearchView
+        android:background="#fff"
+        app:defaultQueryHint="Search Crops"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/seeds_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 </LinearLayout>

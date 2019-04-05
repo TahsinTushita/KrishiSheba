@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import com.sust.bup_project.disease.Disease;
 import com.sust.bup_project.disease.DiseaseAdapter;
 
-public class FragmentDiseaseInfo extends Fragment {
+public class  FragmentDiseaseInfo extends Fragment {
 
     private String diseaseName;
     private TextView diseaseNameTextView;

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/selected_image_view"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/border_gray"
+        android:src="@drawable/leaf"
+        android:scaleType="centerCrop" />
+    <RadioGroup
+        android:checkedButton="@id/select_camera_radio_button"
+        android:layout_marginTop="15dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_below="@id/selected_image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/select_mode_radio_group"
+        >
+
+        <RadioButton
+            android:id="@+id/select_camera_radio_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/select_camera_text" />
+        <RadioButton
+            android:id="@+id/select_gallery_radio_button"
+            android:text="@string/select_gallery_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RadioGroup>
+    <Button
+        android:id="@+id/select_photo_button"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="@string/select_photo_button"
+        android:layout_below="@id/select_mode_radio_group"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content" />
+    <Button
+        android:layout_below="@+id/select_photo_button"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/detect_disease_button"
+        android:layout_width="150dp"
+        android:text="@string/detect_disease_text"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

@@ -1,0 +1,44 @@
+{
+  "project_info": {
+    "project_number": "241707253274",
+    "firebase_url": "https://bupproject-1133c.firebaseio.com",
+    "project_id": "bupproject-1133c",
+    "storage_bucket": "bupproject-1133c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:241707253274:android:714f3f83e030b69d",
+        "android_client_info": {
+          "package_name": "com.sust.bup_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "241707253274-l0b6foupbm26veu2vqivlgkpoe759631.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sust.bup_project",
+            "certificate_hash": "b9b5266b7527430a0bcb11d662d58ff6b66315ce"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpvnzQjEDA2Hty38eUSIq6s3DCaZ1HjXY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "241707253274-b8jg6qoqss3ltl904u73smqs104smanh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

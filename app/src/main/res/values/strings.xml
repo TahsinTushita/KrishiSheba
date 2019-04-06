@@ -52,6 +52,9 @@
     <string name="address">ঠিকানা</string>
     <string name="t_i_n">টিন নাম্বার(TIN):</string>
     <string name="signout_text">লগ আউট</string>
+    <string name="organization_profile_update">Update Profile</string>
+    <string name="postbtn">Post</string>
+    <string name="logout_text">Logout</string>
 
     <string-array name="crops_list">
         <item>আলু</item>

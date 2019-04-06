@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -36,7 +37,7 @@ public class ShowLoanAdsFragment extends Fragment {
     private ArrayList<OrganizationOffers> offersArrayList;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_show_loan_ads, container, false);
 
@@ -53,8 +54,10 @@ public class ShowLoanAdsFragment extends Fragment {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     if(snapshot.getKey().equals("loan")) {
-                        OrganizationOffers offer = snapshot.getValue(OrganizationOffers.class);
-                        offersArrayList.add(offer);
+                        for(DataSnapshot childSnapshot : snapshot.getChildren()) {
+                            OrganizationOffers offer = childSnapshot.getValue(OrganizationOffers.class);
+                            offersArrayList.add(offer);
+                        }
                     }
                 }
                 adapter.notifyDataSetChanged();

@@ -22,9 +22,6 @@ import com.sust.bup_project.R;
 
 import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class SearchResultsFragment extends Fragment {
 
     private String maxDuration,maxAmount;
@@ -36,7 +33,7 @@ public class SearchResultsFragment extends Fragment {
     }
 
     public SearchResultsFragment() {
-        // Required empty public constructor
+
     }
 
     private RecyclerView recyclerView;
@@ -46,13 +43,11 @@ public class SearchResultsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search_results, container, false);
         recyclerView = view.findViewById(R.id.showLoanAds);
         offers = new ArrayList<>();
         adapter = new OrganizationOffersAdapter(offers);
         recyclerView.setAdapter(adapter);
-
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("user/organization");
@@ -61,13 +56,15 @@ public class SearchResultsFragment extends Fragment {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     if(snapshot.getKey().equals("loan")) {
-                        OrganizationOffers offer = snapshot.getValue(OrganizationOffers.class);
-                        if(Integer.valueOf(offer.getMaxamount()) < Integer.valueOf(maxAmount)) {
-                            offers.add(offer);
-                        } else if(Integer.valueOf(offer.getMaxamount()) < Integer.valueOf(maxDuration)) {
-                            offers.add(offer);
-                        }
-                        Toast.makeText(getContext(),snapshot.toString(),Toast.LENGTH_SHORT).show();
+                        for(DataSnapshot childSnapshot : snapshot.getChildren()) {
+                                OrganizationOffers offer = childSnapshot.getValue(OrganizationOffers.class);
+                                Toast.makeText(getContext(), offer.getLoanname() + "" + maxAmount, Toast.LENGTH_LONG).show();
+                                if (offer.getMaxamount() >= Integer.valueOf(maxAmount)) {
+                                    offers.add(offer);
+                                } else if (offer.getDuration() >= Integer.valueOf(maxDuration)) {
+                                    offers.add(offer);
+                                }
+                            }
                     }
                 }
                 adapter.notifyDataSetChanged();

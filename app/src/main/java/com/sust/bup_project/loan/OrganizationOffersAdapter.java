@@ -57,12 +57,12 @@ public class OrganizationOffersAdapter extends RecyclerView.Adapter<Organization
         }
 
         public void setDetails(OrganizationOffers organizationOffers){
-            loanName.setText(organizationOffers.getLoanName());
+            loanName.setText(organizationOffers.getLoanname());
             criteria.setText(organizationOffers.getCriteria());
-            maxAmount.setText(organizationOffers.getMaxAmount());
-            duration.setText(organizationOffers.getDuration());
-            installments.setText(organizationOffers.getInstallments());
-            intRate.setText(organizationOffers.getIntRate());
+            maxAmount.setText(organizationOffers.getMaxamount()+"");
+            duration.setText(organizationOffers.getDuration()+"");
+            installments.setText(organizationOffers.getIntallments()+"");
+            intRate.setText(organizationOffers.getIntrate());
             vat.setText(organizationOffers.getVat());
             mortgage.setText(organizationOffers.getMortgage());
             tax.setText(organizationOffers.getTax());

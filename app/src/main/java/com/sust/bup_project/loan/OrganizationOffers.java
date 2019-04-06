@@ -1,32 +1,35 @@
 package com.sust.bup_project.loan;
 
 public class OrganizationOffers {
-    String loanname;
-    String criteria;
-    String maxamount;
-    String duration;
-    String installments;
-    String intrate;
-    String vat;
-    String mortgage;
-    String tax;
-    String others;
-    String logo;
+    String criteria,
+    intrate,
+    loanname,
+    logo,
+    mortgage,
+    others,
+    tax,
+    vat,
+    personal;
 
-    public String getLogo() {
-        return logo;
+    int duration,
+    maxamount,intallments;
+
+    public OrganizationOffers() {
     }
 
-    public void setLogo(String logo) {
-        this.logo = logo;
-    }
-
-    public String getLoanName() {
-        return loanname;
-    }
-
-    public void setLoanName(String loanname) {
+    public OrganizationOffers(String criteria, String intrate, String loanname, String logo, String mortgage, String others, String tax, String vat, String personal, int duration, int maxamount, int intallments) {
+        this.criteria = criteria;
+        this.intrate = intrate;
         this.loanname = loanname;
+        this.logo = logo;
+        this.mortgage = mortgage;
+        this.others = others;
+        this.tax = tax;
+        this.vat = vat;
+        this.personal = personal;
+        this.duration = duration;
+        this.maxamount = maxamount;
+        this.intallments = intallments;
     }
 
     public String getCriteria() {
@@ -37,44 +40,28 @@ public class OrganizationOffers {
         this.criteria = criteria;
     }
 
-    public String getMaxAmount() {
-        return maxamount;
-    }
-
-    public void setMaxAmount(String maxamount) {
-        this.maxamount = maxamount;
-    }
-
-    public String getDuration() {
-        return duration;
-    }
-
-    public void setDuration(String duration) {
-        this.duration = duration;
-    }
-
-    public String getInstallments() {
-        return installments;
-    }
-
-    public void setInstallments(String installments) {
-        this.installments = installments;
-    }
-
-    public String getIntRate() {
+    public String getIntrate() {
         return intrate;
     }
 
-    public void setIntRate(String intrate) {
+    public void setIntrate(String intrate) {
         this.intrate = intrate;
     }
 
-    public String getVat() {
-        return vat;
+    public String getLoanname() {
+        return loanname;
     }
 
-    public void setVat(String vat) {
-        this.vat = vat;
+    public void setLoanname(String loanname) {
+        this.loanname = loanname;
+    }
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
     }
 
     public String getMortgage() {
@@ -85,14 +72,6 @@ public class OrganizationOffers {
         this.mortgage = mortgage;
     }
 
-    public String getTax() {
-        return tax;
-    }
-
-    public void setTax(String tax) {
-        this.tax = tax;
-    }
-
     public String getOthers() {
         return others;
     }
@@ -101,28 +80,51 @@ public class OrganizationOffers {
         this.others = others;
     }
 
-    public OrganizationOffers(String loanname, String criteria, String maxamount,
-                              String duration, String installments, String intrate, String vat,
-                              String mortgage, String tax, String others) {
-        this.loanname = loanname;
-        this.criteria = criteria;
-        this.maxamount = maxamount;
-        this.duration = duration;
-        this.installments = installments;
-        this.intrate = intrate;
-        this.vat = vat;
-        this.mortgage = mortgage;
+    public String getTax() {
+        return tax;
+    }
+
+    public void setTax(String tax) {
         this.tax = tax;
-        this.others = others;
     }
 
-    public OrganizationOffers(String logo,String loanname,String duration,String maxamount){
-        this.logo = logo;
-        this.loanname = loanname;
+    public String getVat() {
+        return vat;
+    }
+
+    public void setVat(String vat) {
+        this.vat = vat;
+    }
+
+    public String getPersonal() {
+        return personal;
+    }
+
+    public void setPersonal(String personal) {
+        this.personal = personal;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
         this.duration = duration;
+    }
+
+    public int getMaxamount() {
+        return maxamount;
+    }
+
+    public void setMaxamount(int maxamount) {
         this.maxamount = maxamount;
     }
 
-    public OrganizationOffers() {
+    public int getIntallments() {
+        return intallments;
+    }
+
+    public void setIntallments(int intallments) {
+        this.intallments = intallments;
     }
 }

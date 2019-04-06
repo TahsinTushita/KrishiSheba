@@ -51,7 +51,12 @@ public class PersonalAccountActivity extends AppCompatActivity {
                 menuItem.setChecked(true);
                 drawer.closeDrawers();
                 switch (menuItem.getItemId()) {
-
+                    case R.id.nav_search:
+                        if(!(fragment instanceof SearchFragment)) {
+                            fragment = SearchFragment.getFragment();
+                            getSupportFragmentManager().beginTransaction().replace(R.id.MainFragment, fragment).addToBackStack(null).commit();
+                        }
+                        break;
                 }
                 return true;
             }

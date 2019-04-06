@@ -18,6 +18,7 @@
     <string name="seed_calculator_text">Seed Calculator</string>
     <string name="my_location_text">Current Location</string>
     <string name="available_seeds_text">Available Seeds</string>
+    <string name="seed_name_text">Seed Name</string>
 
     <string-array name="crops_list">
         <item>Potato</item>

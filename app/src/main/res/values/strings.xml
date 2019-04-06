@@ -47,6 +47,8 @@
     <string name="search_text">Search</string>
     <string name="loan_max_amount_text">Maxium Loan</string>
     <string name="loan_period_text">Loan Period</string>
+    <string name="loan_search_text">Loan Search</string>
+    <string name="maximum_duration">Maximum Duration</string>
 
     <string-array name="crops_list">
         <item>Potato</item>

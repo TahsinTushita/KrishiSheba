@@ -11,7 +11,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.sust.bup_project.Calculator.RevenueCalculator;
 import com.sust.bup_project.Calculator.SeedCalculatorFragment;
 import com.sust.bup_project.R;
@@ -72,5 +74,10 @@ public class PersonalAccountActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void signOut(View view) {
+        FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(this,MainActivity.class));
     }
 }

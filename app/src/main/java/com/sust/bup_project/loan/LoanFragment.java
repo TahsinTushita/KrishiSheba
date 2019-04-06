@@ -109,6 +109,11 @@ public class LoanFragment extends Fragment{
             getActivity().finish();
         }
 
-
+        signUpBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(context,SignUpActivity.class));
+            }
+        });
     }
 }

@@ -49,6 +49,9 @@
     <string name="loan_period_text">Loan Period</string>
     <string name="loan_search_text">Loan Search</string>
     <string name="maximum_duration">Maximum Duration</string>
+    <string name="address">Address</string>
+    <string name="t_i_n">T.I.N</string>
+    <string name="signout_text">Sign Out</string>
 
     <string-array name="crops_list">
         <item>Potato</item>

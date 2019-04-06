@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -50,6 +52,34 @@ public class LoanFragment extends Fragment{
 
     private EditText userNameEditText,passwordEditText;
     private Button loginBtn,signUpBtn;
+    private RadioGroup selectModeRadioGroup;
+
+
+    private static String[] SELECT_BUTTON_TEXT = {"@user.com","@organization.com"};
+
+    private int radioButtonState = 0;
+    public int getRadioButtonState() {
+        return radioButtonState;
+    }
+
+    public void setRadioButtonState(int radioButtonState) {
+        this.radioButtonState = radioButtonState;
+    }
+
+    private void setUpRadioGroup() {
+        selectModeRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
+                if(checkedId == R.id.personal) {
+                    setRadioButtonState(0);
+                }
+                else if (checkedId == R.id.organization) {
+                    setRadioButtonState(1);
+                }
+            }
+        });
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,8 +90,10 @@ public class LoanFragment extends Fragment{
         passwordEditText = v.findViewById(R.id.password_text);
         loginBtn = v.findViewById(R.id.login_btn_id);
         signUpBtn = v.findViewById(R.id.signup_btn);
+        selectModeRadioGroup = v.findViewById(R.id.radioGroupUserType);
 
         addListenerToLoginOrSignUp();
+        setUpRadioGroup();
 
         return v;
     }
@@ -86,14 +118,17 @@ public class LoanFragment extends Fragment{
                         Snackbar.make(getView(), R.string.invalid_login_msg, Snackbar.LENGTH_SHORT)
                                 .show();
                     } else {
-                        firebaseAuth.signInWithEmailAndPassword(username + "@user.com", password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        firebaseAuth.signInWithEmailAndPassword(username + SELECT_BUTTON_TEXT[getRadioButtonState()], password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     String user = firebaseAuth.getCurrentUser().getEmail();
                                     user = user.substring(0,user.lastIndexOf('@')).trim();
                                     Snackbar.make(getView(), R.string.successful_login, Snackbar.LENGTH_SHORT).show();
+                                    if(getRadioButtonState() == 0)
                                     startActivity(new Intent(context, PersonalAccountActivity.class));
+                                    else
+                                    startActivity(new Intent(context,OrganizationHomeActivity.class));
                                 } else {
                                     Snackbar.make(getView(), R.string.unsuccessful_login, Snackbar.LENGTH_SHORT).show();
                                 }

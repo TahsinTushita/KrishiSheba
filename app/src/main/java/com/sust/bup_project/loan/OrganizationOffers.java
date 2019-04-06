@@ -1,12 +1,12 @@
 package com.sust.bup_project.loan;
 
 public class OrganizationOffers {
-    String loanName;
+    String loanname;
     String criteria;
-    String maxAmount;
+    String maxamount;
     String duration;
     String installments;
-    String intRate;
+    String intrate;
     String vat;
     String mortgage;
     String tax;
@@ -22,11 +22,11 @@ public class OrganizationOffers {
     }
 
     public String getLoanName() {
-        return loanName;
+        return loanname;
     }
 
-    public void setLoanName(String loanName) {
-        this.loanName = loanName;
+    public void setLoanName(String loanname) {
+        this.loanname = loanname;
     }
 
     public String getCriteria() {
@@ -38,11 +38,11 @@ public class OrganizationOffers {
     }
 
     public String getMaxAmount() {
-        return maxAmount;
+        return maxamount;
     }
 
-    public void setMaxAmount(String maxAmount) {
-        this.maxAmount = maxAmount;
+    public void setMaxAmount(String maxamount) {
+        this.maxamount = maxamount;
     }
 
     public String getDuration() {
@@ -62,11 +62,11 @@ public class OrganizationOffers {
     }
 
     public String getIntRate() {
-        return intRate;
+        return intrate;
     }
 
-    public void setIntRate(String intRate) {
-        this.intRate = intRate;
+    public void setIntRate(String intrate) {
+        this.intrate = intrate;
     }
 
     public String getVat() {
@@ -101,19 +101,26 @@ public class OrganizationOffers {
         this.others = others;
     }
 
-    public OrganizationOffers(String loanName, String criteria, String maxAmount,
-                              String duration, String installments, String intRate, String vat,
+    public OrganizationOffers(String loanname, String criteria, String maxamount,
+                              String duration, String installments, String intrate, String vat,
                               String mortgage, String tax, String others) {
-        this.loanName = loanName;
+        this.loanname = loanname;
         this.criteria = criteria;
-        this.maxAmount = maxAmount;
+        this.maxamount = maxamount;
         this.duration = duration;
         this.installments = installments;
-        this.intRate = intRate;
+        this.intrate = intrate;
         this.vat = vat;
         this.mortgage = mortgage;
         this.tax = tax;
         this.others = others;
+    }
+
+    public OrganizationOffers(String logo,String loanname,String duration,String maxamount){
+        this.logo = logo;
+        this.loanname = loanname;
+        this.duration = duration;
+        this.maxamount = maxamount;
     }
 
     public OrganizationOffers() {

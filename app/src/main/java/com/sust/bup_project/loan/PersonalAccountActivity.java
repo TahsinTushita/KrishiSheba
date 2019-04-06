@@ -39,6 +39,9 @@ public class PersonalAccountActivity extends AppCompatActivity {
 
         setNavigationMenuListener(navigationView);
 
+        fragment = new ShowLoanAdsFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.MainFragment,fragment).commit();
+
     }
 
     private void setNavigationMenuListener(NavigationView navigationView) {

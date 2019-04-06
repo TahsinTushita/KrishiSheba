@@ -116,13 +116,6 @@ public class OrganizationOffers {
         this.others = others;
     }
 
-    public OrganizationOffers(String logo,String loanName,String duration,String maxAmount){
-        this.logo = logo;
-        this.loanName = loanName;
-        this.duration = duration;
-        this.maxAmount = maxAmount;
-    }
-
     public OrganizationOffers() {
     }
 }

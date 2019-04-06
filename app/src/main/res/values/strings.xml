@@ -19,6 +19,19 @@
     <string name="my_location_text">Current Location</string>
     <string name="available_seeds_text">Available Seeds</string>
     <string name="seed_name_text">Seed Name</string>
+    <string name="organization_name">Organization name</string>
+    <string name="test">Test</string>
+    <string name="maximum_amount">Maximum amount: </string>
+    <string name="amount">amount</string>
+    <string name="duration">Duration:</string>
+    <string name="installments">Intallments:</string>
+    <string name="interest_rate">Interest Rate:</string>
+    <string name="vat">VAT:</string>
+    <string name="mortgage">Mortgage:</string>
+    <string name="tax">TAX</string>
+    <string name="others">Others:</string>
+    <string name="loan_name">Loan Name:</string>
+    <string name="loan_criteria">Criteria:</string>
 
     <string-array name="crops_list">
         <item>Potato</item>

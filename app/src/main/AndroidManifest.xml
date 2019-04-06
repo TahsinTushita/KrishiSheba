@@ -28,7 +28,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".loan.SignUpActivity"></activity>
+        <activity android:name=".loan.ShowPost"></activity>
+        <activity android:name=".loan.SignUpActivity" />
         <activity android:name=".loan.OrganizationHomeActivity" />
         <activity android:name=".map.MapActivity" />
         <activity android:name=".loan.PersonalAccountActivity" />

@@ -1,6 +1,7 @@
 package com.sust.bup_project.loan;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -26,6 +27,15 @@ import java.util.ArrayList;
  */
 public class ShowLoanAdsFragment extends Fragment {
 
+    OrganizationOffersAdapter.OnItemClickListener listener = new OrganizationOffersAdapter.OnItemClickListener() {
+        @Override
+        public void onItemClick(OrganizationOffers offer) {
+            Intent i = new Intent(getContext(),ShowPost.class);
+            i.putExtra("offer",offer);
+            startActivity(i);
+        }
+    };
+
 
     public ShowLoanAdsFragment() {
         // Required empty public constructor
@@ -44,7 +54,7 @@ public class ShowLoanAdsFragment extends Fragment {
         showPostRecyclerView = view.findViewById(R.id.showLoanAds);
         showPostRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         offersArrayList = new ArrayList<>();
-        adapter = new OrganizationOffersAdapter(offersArrayList);
+        adapter = new OrganizationOffersAdapter(listener,offersArrayList,getContext());
         showPostRecyclerView.setAdapter(adapter);
 
         DatabaseReference database = FirebaseDatabase.getInstance().getReference("user/organization");

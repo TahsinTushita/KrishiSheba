@@ -1,6 +1,8 @@
 package com.sust.bup_project.loan;
 
-public class OrganizationOffers {
+import java.io.Serializable;
+
+public class OrganizationOffers implements Serializable {
     String criteria,
     intrate,
     loanname,

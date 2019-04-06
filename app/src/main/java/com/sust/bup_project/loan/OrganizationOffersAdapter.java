@@ -1,5 +1,7 @@
 package com.sust.bup_project.loan;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,14 +10,26 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
 import com.sust.bup_project.R;
 
 import java.util.ArrayList;
 
 public class OrganizationOffersAdapter extends RecyclerView.Adapter<OrganizationOffersAdapter.OrganizationOffersViewHolder> {
 
-    ArrayList<OrganizationOffers> organizationOffersArrayList;
+    public interface OnItemClickListener {
+        void onItemClick(OrganizationOffers offer);
+    }
 
+    ArrayList<OrganizationOffers> organizationOffersArrayList;
+    Context context;
+    public OnItemClickListener listener;
+
+    public OrganizationOffersAdapter(OnItemClickListener listener,ArrayList<OrganizationOffers> organizationOffersArrayList,Context context){
+        this.organizationOffersArrayList = organizationOffersArrayList;
+        this.context = context;
+        this.listener = listener;
+    }
     public OrganizationOffersAdapter(ArrayList<OrganizationOffers> organizationOffersArrayList){
         this.organizationOffersArrayList = organizationOffersArrayList;
     }
@@ -31,6 +45,7 @@ public class OrganizationOffersAdapter extends RecyclerView.Adapter<Organization
     public void onBindViewHolder(@NonNull OrganizationOffersViewHolder organizationOffersViewHolder, int i) {
         OrganizationOffers organizationOffers = organizationOffersArrayList.get(i);
         organizationOffersViewHolder.setDetails(organizationOffers);
+        organizationOffersViewHolder.bind(organizationOffers,listener);
     }
 
     @Override
@@ -67,6 +82,17 @@ public class OrganizationOffersAdapter extends RecyclerView.Adapter<Organization
             mortgage.setText(organizationOffers.getMortgage());
             tax.setText(organizationOffers.getTax());
             others.setText(organizationOffers.getOthers());
+        }
+
+        public void bind(final OrganizationOffers offers,OnItemClickListener listener){
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context,ShowPost.class);
+                    intent.putExtra("offer",offers);
+                    v.getContext().startActivity(intent);
+                }
+            });
         }
     }
 }

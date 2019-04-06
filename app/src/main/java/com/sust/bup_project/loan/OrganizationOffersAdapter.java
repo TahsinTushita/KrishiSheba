@@ -24,12 +24,13 @@ public class OrganizationOffersAdapter extends RecyclerView.Adapter<Organization
     public OrganizationOffersViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
         LinearLayout layout = (LinearLayout) LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.manage_post_layout,viewGroup,false);
-        return null;
+        return new OrganizationOffersAdapter.OrganizationOffersViewHolder(layout);
     }
 
     @Override
     public void onBindViewHolder(@NonNull OrganizationOffersViewHolder organizationOffersViewHolder, int i) {
-
+        OrganizationOffers organizationOffers = organizationOffersArrayList.get(i);
+        organizationOffersViewHolder.setDetails(organizationOffers);
     }
 
     @Override

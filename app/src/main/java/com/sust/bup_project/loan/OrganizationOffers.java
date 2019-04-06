@@ -11,6 +11,15 @@ public class OrganizationOffers {
     String mortgage;
     String tax;
     String others;
+    String logo;
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
 
     public String getLoanName() {
         return loanName;
@@ -105,6 +114,13 @@ public class OrganizationOffers {
         this.mortgage = mortgage;
         this.tax = tax;
         this.others = others;
+    }
+
+    public OrganizationOffers(String logo,String loanName,String duration,String maxAmount){
+        this.logo = logo;
+        this.loanName = loanName;
+        this.duration = duration;
+        this.maxAmount = maxAmount;
     }
 
     public OrganizationOffers() {

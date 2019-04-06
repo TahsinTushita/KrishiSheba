@@ -1,69 +1,69 @@
 <resources>
     <string name="app_name">BUP_Project</string>
     <string name="sample_test"><![CDATA[hello tushi <3]]></string>
-    <string name="select_camera_text">Camera</string>
-    <string name="select_gallery_text">Gallery</string>
-    <string name="select_photo_button">Take Photo</string>
-    <string name="detect_disease_text">Detect Disease</string>
-    <string name="disease_name">Name of disease</string>
-    <string name="disease_photos">Examples</string>
+    <string name="select_camera_text">ক্যামেরা</string>
+    <string name="select_gallery_text">গ্যালারি</string>
+    <string name="select_photo_button">ছবি তুলুন</string>
+    <string name="detect_disease_text">রোগ সনাক্ত করুন</string>
+    <string name="disease_name">রোগের নাম</string>
+    <string name="disease_photos">উদাহরন</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="community_text">Community</string>
-    <string name="shop_text">Shop</string>
+    <string name="community_text">সমিতি</string>
+    <string name="shop_text">নার্সারি</string>
     <string name="chatbot_text">ChatBot Support</string>
-    <string name="map_text">Crops Map</string>
-    <string name="approx_production_text">Approximate Production</string>
-    <string name="seed_calculator_text">Seed Calculator</string>
-    <string name="my_location_text">Current Location</string>
-    <string name="available_seeds_text">Available Seeds</string>
-    <string name="seed_name_text">Seed Name</string>
-    <string name="organization_name">Organization name</string>
-    <string name="test">Test</string>
-    <string name="maximum_amount">Maximum amount: </string>
-    <string name="amount">amount</string>
-    <string name="duration">Duration:</string>
-    <string name="installments">Intallments:</string>
-    <string name="interest_rate">Interest Rate:</string>
-    <string name="vat">VAT:</string>
-    <string name="mortgage">Mortgage:</string>
-    <string name="tax">TAX</string>
-    <string name="others">Others:</string>
-    <string name="loan_name">Loan Name:</string>
-    <string name="loan_criteria">Criteria:</string>
-    <string name="user_name">Username</string>
-    <string name="password">Password</string>
-    <string name="personal_account_text">Personal Account</string>
-    <string name="organization_account_text">Organization</string>
-    <string name="login_text">Login</string>
-    <string name="or_text">Or</string>
-    <string name="signup_text">Sign Up</string>
-    <string name="invalid_login_msg">Login Invalid</string>
-    <string name="successful_login">Login Successful!</string>
-    <string name="unsuccessful_login">Login Unsuccesful!</string>
-    <string name="loan_text">Loan</string>
-    <string name="update_profile_text">Update Profile</string>
-    <string name="search_text">Search</string>
-    <string name="loan_max_amount_text">Maxium Loan</string>
-    <string name="loan_period_text">Loan Period</string>
-    <string name="loan_search_text">Loan Search</string>
-    <string name="maximum_duration">Maximum Duration</string>
-    <string name="address">Address</string>
-    <string name="t_i_n">T.I.N</string>
-    <string name="signout_text">Sign Out</string>
+    <string name="map_text">ফসলের ম্যাপ</string>
+    <string name="approx_production_text">আনুমানিক উৎপাদন </string>
+    <string name="seed_calculator_text">বীজ পরিমাপ করুন</string>
+    <string name="my_location_text">আপনার অবস্থান</string>
+    <string name="available_seeds_text">বীজ  </string>
+    <string name="seed_name_text">বীজের নাম</string>
+    <string name="organization_name">ব্যাংক/প্রতিষ্ঠানের নাম</string>
+    <string name="test">টেস্ট</string>
+    <string name="maximum_amount">সর্বোচ্চ পরিমান: </string>
+    <string name="amount">পরিমান</string>
+    <string name="duration">সময়:</string>
+    <string name="installments">কিস্তি:</string>
+    <string name="interest_rate">সুদের হার:</string>
+    <string name="vat">ভ্যাট:</string>
+    <string name="mortgage">বন্ধক:</string>
+    <string name="tax">কর</string>
+    <string name="others">অন্যান্য:</string>
+    <string name="loan_name">লোনের নাম:</string>
+    <string name="loan_criteria">শর্ত:</string>
+    <string name="user_name">ব্যবহারকারীর নাম</string>
+    <string name="password">পাসওয়ার্ড</string>
+    <string name="personal_account_text">নিজস্ব একাউন্ট</string>
+    <string name="organization_account_text">ব্যাংক/প্রতিষ্ঠানের একাউন্ট</string>
+    <string name="login_text">লগিন</string>
+    <string name="or_text">অথবা</string>
+    <string name="signup_text">একাউন্ট খুলুন</string>
+    <string name="invalid_login_msg">লগিন ব্যর্থ</string>
+    <string name="successful_login">লগিন সফল!</string>
+    <string name="unsuccessful_login">লগিন ব্যর্থ!</string>
+    <string name="loan_text">ঋণ</string>
+    <string name="update_profile_text">প্রোফাইল সম্পাদনা করুন</string>
+    <string name="search_text">খুজুন</string>
+    <string name="loan_max_amount_text">সর্বোচ্চ ঋণ</string>
+    <string name="loan_period_text">ঋণের সময়কাল</string>
+    <string name="loan_search_text">ঋণ খুজুন</string>
+    <string name="maximum_duration">সর্বোচ্চ সময়কাল</string>
+    <string name="address">ঠিকানা</string>
+    <string name="t_i_n">টিন নাম্বার(TIN):</string>
+    <string name="signout_text">লগ আউট</string>
 
     <string-array name="crops_list">
-        <item>Potato</item>
-        <item>Tomato</item>
-        <item>Corn</item>
+        <item>আলু</item>
+        <item>টমেটো</item>
+        <item>ভুট্টা</item>
     </string-array>
 
     <string-array name="unit_list">
-        <item>Acre</item>
-        <item>Katha</item>
-        <item>Bigha</item>
-        <item>Shotok</item>
-        <item>Hectare</item>
+        <item>একর</item>
+        <item>কাঠা</item>
+        <item>বিঘা</item>
+        <item>শতক</item>
+        <item>হেক্টর</item>
     </string-array>
 </resources>

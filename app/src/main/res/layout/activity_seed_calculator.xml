@@ -18,6 +18,7 @@
             android:layout_marginTop="20dp"
             android:layout_height="wrap_content"
             android:hint="Enter size of land"
+            android:inputType="number"
             android:id="@+id/landSizeText"
             />
 

@@ -20,8 +20,10 @@ public class SeedCalculator extends AppCompatActivity {
     TextView resultText;
     Button calcubtn,confirmbtn;
     ArrayAdapter<CharSequence> unitAdapter,cropsAdapter;
-    Double size,result;
+    //Double size,result;
+    double size,result;
     String s,resultString;
+    double d;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,13 +43,13 @@ public class SeedCalculator extends AppCompatActivity {
         unitSpinner.setAdapter(unitAdapter);
         cropsSpinner.setAdapter(cropsAdapter);
 
-        size = new Double(0);
-        result = new Double(0);
-
         confirmbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 getLandSize();
+                Toast.makeText(SeedCalculator.this,Double.toString(size),Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -56,7 +58,7 @@ public class SeedCalculator extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if(i==0){
                     size = size;
-                    Toast.makeText(SeedCalculator.this,size.toString(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SeedCalculator.this,Double.toString(size),Toast.LENGTH_SHORT).show();
                 }
                 else if(i==1){
                     size = size*(0.01652853);
@@ -110,10 +112,11 @@ public class SeedCalculator extends AppCompatActivity {
     public void getLandSize(){
         s = unitEdittext.getText().toString().trim();
         size = Double.parseDouble(s);
+
     }
 
     public String getResult(){
-        resultString = result.toString();
+        resultString = Double.toString(result);
         return resultString;
     }
 }

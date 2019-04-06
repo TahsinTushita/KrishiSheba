@@ -19,6 +19,10 @@
     </group>
     <group android:id="@+id/nav_bottom" android:checkableBehavior="single">
         <item
+            android:title="@string/loan_text"
+            android:id="@+id/nav_loan"
+            />
+        <item
             android:title="@string/map_text"
             android:id="@+id/nav_map" />
         <item android:title="@string/seed_calculator_text"

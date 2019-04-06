@@ -1,0 +1,13 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:id="@+id/nav_top"
+        android:checkableBehavior="single">
+        <item
+            android:checked="true"
+            android:id="@+id/nav_update_profile"
+            android:title="@string/update_profile_text" />
+        <item
+            android:id="@+id/nav_search"
+            android:title="@string/search_text"/>
+    </group>
+</menu>

@@ -19,6 +19,7 @@ import com.google.firebase.FirebaseApp;
 import com.sust.bup_project.Calculator.RevenueCalculator;
 import com.sust.bup_project.Calculator.SeedCalculatorFragment;
 import com.sust.bup_project.R;
+import com.sust.bup_project.loan.LoanFragment;
 import com.sust.bup_project.map.MapActivity;
 
 import java.util.List;
@@ -56,10 +57,17 @@ public class MainActivity extends AppCompatActivity implements FragmentDiseaseDe
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
+
         requestPermissions();
+
         FirebaseApp.initializeApp(this);
         fragment = new FragmentDiseaseDetector();
         getSupportFragmentManager().beginTransaction().replace(R.id.MainFragment,fragment).commit();
+
+        setNavigationMenuListener(navigationView);
+    }
+
+    private void setNavigationMenuListener(NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -89,6 +97,12 @@ public class MainActivity extends AppCompatActivity implements FragmentDiseaseDe
                     case R.id.nav_map:
                         Intent intent = new Intent(MainActivity.this, MapActivity.class);
                         startActivity(intent);
+                        break;
+                    case R.id.nav_loan:
+                        if(!(fragment instanceof LoanFragment)) {
+                            fragment = LoanFragment.getFragment();
+                            getSupportFragmentManager().beginTransaction().replace(R.id.MainFragment, fragment).addToBackStack(null).commit();
+                        }
                         break;
                 }
                 return true;

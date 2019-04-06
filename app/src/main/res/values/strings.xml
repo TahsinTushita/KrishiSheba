@@ -32,6 +32,21 @@
     <string name="others">Others:</string>
     <string name="loan_name">Loan Name:</string>
     <string name="loan_criteria">Criteria:</string>
+    <string name="user_name">Username</string>
+    <string name="password">Password</string>
+    <string name="personal_account_text">Personal Account</string>
+    <string name="organization_account_text">Organization</string>
+    <string name="login_text">Login</string>
+    <string name="or_text">Or</string>
+    <string name="signup_text">Sign Up</string>
+    <string name="invalid_login_msg">Login Invalid</string>
+    <string name="successful_login">Login Successful!</string>
+    <string name="unsuccessful_login">Login Unsuccesful!</string>
+    <string name="loan_text">Loan</string>
+    <string name="update_profile_text">Update Profile</string>
+    <string name="search_text">Search</string>
+    <string name="loan_max_amount_text">Maxium Loan</string>
+    <string name="loan_period_text">Loan Period</string>
 
     <string-array name="crops_list">
         <item>Potato</item>

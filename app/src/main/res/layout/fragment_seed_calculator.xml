@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    android:gravity="center"
+    android:layout_gravity="center"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,53 +10,48 @@
     tools:context=".Calculator.SeedCalculatorFragment">
 
     <LinearLayout
+        android:gravity="center"
+        android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         >
 
         <EditText
+            android:inputType="number"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:padding="10dp"
             android:layout_width="wrap_content"
-            android:layout_marginTop="20dp"
             android:layout_height="wrap_content"
-            android:hint="Enter size of land"
+            android:hint="@string/land_size"
             android:id="@+id/landSizeText"
             />
 
-        <Button
+        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:padding="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/confirmbtn"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="20dp"
-            android:text="confirm"
+            android:entries="@array/unit_list"
+            android:id="@+id/unitSpinner"
             />
 
     </LinearLayout>
-
-
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:entries="@array/unit_list"
-        android:autofillHints="Select Unit"
-        android:id="@+id/unitSpinner"
-        />
-
     <TextView
+        android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Select the name of the see you want to cultivate"
+        android:text="@string/select_crop_to_calculate_seed"
         android:textStyle="bold"
         />
 
-    <Spinner
+    <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+        android:padding="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:autofillHints="Crops"
-        android:layout_marginTop="20dp"
         android:entries="@array/crops_list"
         android:id="@+id/cropSpinner"/>
 
@@ -62,7 +59,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:padding="10dp"
         android:layout_gravity="center"
         android:text="calculate"
         android:id="@+id/calcubtn"
@@ -71,11 +68,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="result"
-        android:layout_gravity="center"
+        android:gravity="bottom|center"
+        android:text="@string/result"
+        android:layout_gravity="center|bottom"
         android:id="@+id/resultText"
         />
-
-
 </LinearLayout>

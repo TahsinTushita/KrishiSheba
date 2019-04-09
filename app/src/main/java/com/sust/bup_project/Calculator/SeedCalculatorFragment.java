@@ -17,18 +17,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sust.bup_project.R;
+import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 
 public class SeedCalculatorFragment extends Fragment {
 
-    Spinner cropsSpinner,unitSpinner;
-    EditText unitEdittext;
-    TextView resultText;
-    Button calcubtn,confirmbtn;
-    ArrayAdapter<CharSequence> unitAdapter,cropsAdapter;
-    Double size,result;
-    String s,resultString;
-
+    private SearchableSpinner unitSpinner;
+    private SearchableSpinner cropSpinner;
+    private Button calculateBtn;
+    private EditText landSizeText;
+    private TextView resultTextView;
 
     private static Fragment fragment;
 
@@ -40,107 +38,55 @@ public class SeedCalculatorFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        unitAdapter = ArrayAdapter.createFromResource(context,R.array.unit_list,android.R.layout.simple_spinner_dropdown_item);
-        cropsAdapter = ArrayAdapter.createFromResource(context,R.array.crops_list,android.R.layout.simple_spinner_dropdown_item);
-        unitAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        cropsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_seed_calculator, container, false);
-
-        cropsSpinner = view.findViewById(R.id.cropSpinner);
         unitSpinner = view.findViewById(R.id.unitSpinner);
-        unitEdittext = view.findViewById(R.id.landSizeText);
-        resultText = view.findViewById(R.id.resultText);
-        confirmbtn = view.findViewById(R.id.confirmbtn);
-        calcubtn = view.findViewById(R.id.calcubtn);
-        unitSpinner.setAdapter(unitAdapter);
-        cropsSpinner.setAdapter(cropsAdapter);
+        cropSpinner = view.findViewById(R.id.cropSpinner);
+        calculateBtn = view.findViewById(R.id.calcubtn);
+        landSizeText = view.findViewById(R.id.landSizeText);
+        resultTextView = view.findViewById(R.id.resultText);
 
-        size = new Double(0);
-        result = new Double(0);
-
-        confirmbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getLandSize();
-            }
-        });
-
-        unitSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if(i==0){
-                    size = size;
-                    Toast.makeText(getContext(),size.toString(),Toast.LENGTH_SHORT).show();
-                }
-                else if(i==1){
-                    size = size*(0.01652853);
-                }
-                else if(i==2){
-                    size = size*(.33333333);
-                }
-                else if(i==3){
-                    size = size*(0.01);
-                }
-                else if(i==4){
-                    size = size*(2.47);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-        cropsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if(i==0){
-                    result = size*728744.939271;
-                }
-                else if(i==1){
-                    result = size*28.3495;
-                }
-                else if(i==2){
-                    result = size*68038.9;
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-        calcubtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                resultText.setText("The approximate amount of seed needed for production is "+resultString+" gm");
-            }
-        });
-
-
-
-
+        calculateBtn.setOnClickListener(calculateClickListener);
         return view;
     }
 
-    public void getLandSize(){
-        s = unitEdittext.getText().toString().trim();
-        size = Double.parseDouble(s);
+    View.OnClickListener calculateClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            double result = Double.valueOf(landSizeText.getText().toString());
+            String unit = unitSpinner.getSelectedItem().toString();
+            String crop = cropSpinner.getSelectedItem().toString();
+            Converter converter = new Converter(result,unit);
+
+            Double tempResult = 0.0;
+            switch (crop) {
+                case "potato" :
+                    tempResult = converter.getConversion() * SeedPerArea.POTATO.getSeedsInGrams();
+                    break;
+                case "tomato" :
+                    tempResult = converter.getConversion() * SeedPerArea.TOMATO.getSeedsInGrams();
+                    break;
+                case "rice" :
+                    tempResult = converter.getConversion() * SeedPerArea.RICE.getSeedsInGrams();
+                    break;
+                case "corn" :
+                    tempResult = converter.getConversion() * SeedPerArea.CORN.getSeedsInGrams();
+                    break;
+
+            }
+            resultTextView.setText("You need " + min(tempResult.shortValue(),1) + " grams of " + crop + " seeds");
+        }
+    };
+
+    private String min(short shortValue, int i) {
+        if (shortValue < i) {
+            return String.valueOf(i);
+        }
+        return String.valueOf(shortValue);
     }
-
-    public String getResult(){
-        resultString = result.toString();
-        return resultString;
-    }
-
-
 
 }

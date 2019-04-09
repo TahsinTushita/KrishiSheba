@@ -19,18 +19,22 @@
     <string name="my_location_text">Current Location</string>
     <string name="available_seeds_text">Available Seeds</string>
     <string name="seed_name_text">Seed Name</string>
+    <string name="select_crop_to_calculate_seed">Select Crop</string>
+    <string name="land_size">Land Size</string>
+    <string name="result">Result</string>
 
     <string-array name="crops_list">
-        <item>Potato</item>
-        <item>Tomato</item>
-        <item>Corn</item>
+        <item>potato</item>
+        <item>tomato</item>
+        <item>corn</item>
+        <item>rice</item>
     </string-array>
 
     <string-array name="unit_list">
-        <item>Acre</item>
-        <item>Katha</item>
-        <item>Bigha</item>
-        <item>Shotok</item>
-        <item>Hectare</item>
+        <item>acre</item>
+        <item>katha</item>
+        <item>bigha</item>
+        <item>shotok</item>
+        <item>hectare</item>
     </string-array>
 </resources>

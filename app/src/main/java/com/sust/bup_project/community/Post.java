@@ -1,6 +1,8 @@
 package com.sust.bup_project.community;
 
-class Post {
+import java.io.Serializable;
+
+class Post implements Serializable {
     private String username;
     private String title;
     private String description;

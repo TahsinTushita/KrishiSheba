@@ -8,55 +8,69 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.sust.bup_project.R;
 
 import java.util.ArrayList;
 
-public class CommunityActivity extends AppCompatActivity {
-
+public class InsidePostActivity extends AppCompatActivity {
     private RecyclerView postRecyclerView;
     private ArrayList<Post> postArrayList;
     private PostAdapter postAdapter;
+    private Post post;
+    private TextView titleTextView,userNameTextView,descriptionTextView;
+    private EditText discussionPostEditText;
 
     PostItemListener postListener = new PostItemListener() {
         @Override
         public void OnPostClick(Post post) {
-            Intent intent = new Intent(CommunityActivity.this,InsidePostActivity.class);
-            intent.putExtra("post",post);
-            startActivity(intent);
+            Toast.makeText(InsidePostActivity.this,"Clicked",Toast.LENGTH_LONG).show();
         }
     };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_community);
+        setContentView(R.layout.activity_inside_post);
+        post = (Post) getIntent().getSerializableExtra("post");
         postRecyclerView = findViewById(R.id.postRecyclerView);
         postArrayList = new ArrayList<>();
         postAdapter = new PostAdapter(postListener,this,postArrayList);
         postRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         postRecyclerView.setAdapter(postAdapter);
-        DatabaseReference database = FirebaseDatabase.getInstance().getReference("Community/Posts");
-        database.addChildEventListener(postChildEventListener);
+        setDetails();
+        Query query = FirebaseDatabase.getInstance().getReference("Community/Discussion").orderByChild("key").equalTo(post.getKey());
+        query.addChildEventListener(postChildEventListener);
 
+    }
+
+    private void setDetails() {
+        discussionPostEditText = findViewById(R.id.discussionPostEditText);
+        userNameTextView = findViewById(R.id.usernameTextView);
+        titleTextView = findViewById(R.id.titleTextView);
+        descriptionTextView = findViewById(R.id.descriptionTextView);
+        userNameTextView.setText(post.getUsername());
+        titleTextView .setText(post.getTitle());
+        descriptionTextView .setText(post.getDescription());
     }
 
     ChildEventListener postChildEventListener = new ChildEventListener() {
         @Override
         public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                    Post post = dataSnapshot.getValue(Post.class);
-                    post.setKey(dataSnapshot.getKey());
-                    postArrayList.add(post);
-                    postAdapter.notifyDataSetChanged();
-                    postRecyclerView.setAdapter(postAdapter);
+            Post post = dataSnapshot.getValue(Post.class);
+            postArrayList.add(post);
+            postAdapter.notifyDataSetChanged();
+            postRecyclerView.setAdapter(postAdapter);
         }
 
         @Override
@@ -80,11 +94,15 @@ public class CommunityActivity extends AppCompatActivity {
         }
     };
 
-    public void onLogOutClick(View view) {
-        FirebaseAuth.getInstance().signOut();
-        onBackPressed();
-    }
-
     public void onCreatePostClick(View view) {
+        Post newPost = new Post();
+        newPost.setTitle(post.getTitle());
+        newPost.setKey(post.getKey());
+        newPost.setDescription(discussionPostEditText.getText().toString());
+        newPost.setUsername(User.getUserName());
+        Task<Void> database = FirebaseDatabase.getInstance().getReference("Community/Discussion").push().setValue(newPost);
+        if (database.isSuccessful()) {
+            Toast.makeText(InsidePostActivity.this,"Post Successful",Toast.LENGTH_LONG).show();
+        }
     }
 }

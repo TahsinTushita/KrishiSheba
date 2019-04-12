@@ -24,11 +24,11 @@ public class PostViewHolder extends RecyclerView.ViewHolder {
         descriptionTextView.setText(post.getDescription());
     }
 
-    public void bind(final PostItemListener postItemListener, Post post) {
+    public void bind(final PostItemListener postItemListener, final Post post) {
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                postItemListener.OnPostClick();
+                postItemListener.OnPostClick(post);
             }
         });
     }

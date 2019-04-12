@@ -16,7 +16,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.sust.bup_project.R;
@@ -68,7 +67,7 @@ public class InsidePostActivity extends AppCompatActivity {
         @Override
         public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
             Post post = dataSnapshot.getValue(Post.class);
-            postArrayList.add(post);
+            postArrayList.add(0,post);
             postAdapter.notifyDataSetChanged();
             postRecyclerView.setAdapter(postAdapter);
         }

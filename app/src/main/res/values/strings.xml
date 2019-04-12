@@ -32,6 +32,12 @@
     <string name="wrote">wrote</string>
     <string name="title">Title</string>
     <string name="post">Post</string>
+    <string name="enter_full_name">Enter Full Name</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="enter_email">Enter Email</string>
+    <string name="enter_address">Enter Address</string>
+    <string name="enter_phone_number">Enter Phone Number</string>
+    <string name="sign_up">Sign Up</string>
     <string name="crops_search">Search for crops</string>
 
     <string-array name="crops_list">

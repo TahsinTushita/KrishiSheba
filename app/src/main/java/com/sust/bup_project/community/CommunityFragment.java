@@ -42,6 +42,9 @@ public class CommunityFragment extends Fragment {
         if(firebaseAuth.getCurrentUser() == null) {
             loginBtn.setOnClickListener(loginBtnListener);
         } else  {
+            String user = firebaseAuth.getCurrentUser().getEmail();
+            user = user.substring(0, user.lastIndexOf('@')).trim();
+            User.setUserName(user);
             startActivity(new Intent(getContext(),CommunityActivity.class));
         }
             return view;

@@ -19,6 +19,7 @@ import com.google.firebase.FirebaseApp;
 import com.sust.bup_project.Calculator.RevenueCalculator;
 import com.sust.bup_project.Calculator.SeedCalculatorFragment;
 import com.sust.bup_project.R;
+import com.sust.bup_project.community.CommunityFragment;
 import com.sust.bup_project.map.MapActivity;
 
 import java.util.List;
@@ -66,6 +67,12 @@ public class MainActivity extends AppCompatActivity implements FragmentDiseaseDe
                 menuItem.setChecked(true);
                 drawer.closeDrawers();
                 switch (menuItem.getItemId()) {
+                    case R.id.nav_community:
+                        if(!(fragment instanceof CommunityFragment)) {
+                            fragment = new CommunityFragment();
+                            getSupportFragmentManager().beginTransaction().replace(R.id.MainFragment, fragment).commit();
+                        }
+                        break;
                     case R.id.nav_detect:
                         if(!(fragment instanceof FragmentDiseaseDetector)) {
                             fragment = FragmentDiseaseDetector.getFragment();

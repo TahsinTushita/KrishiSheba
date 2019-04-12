@@ -22,6 +22,16 @@
     <string name="select_crop_to_calculate_seed">Select Crop</string>
     <string name="land_size">Land Size</string>
     <string name="result">Result</string>
+    <string name="login_text">LOGIN</string>
+    <string name="invalid_login_msg">Login Invalid!</string>
+    <string name="successful_login">Login Successful!</string>
+    <string name="unsuccessful_login">Login Failed</string>
+    <string name="reg_text">Register</string>
+    <string name="create_a_post">Create A Post</string>
+    <string name="user_name">Username</string>
+    <string name="wrote">wrote</string>
+    <string name="title">Title</string>
+    <string name="post">Post</string>
 
     <string-array name="crops_list">
         <item>potato</item>

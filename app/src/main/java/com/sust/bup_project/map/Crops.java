@@ -4,6 +4,13 @@ public class Crops {
 
     String place;
 
+    public Crops(String place, String name) {
+        this.place = place;
+        this.name = name;
+    }
+
+    String name;
+
     public String getPlace() {
         return place;
     }
@@ -15,8 +22,11 @@ public class Crops {
     public Crops() {
     }
 
-    public Crops(String place) {
-        this.place = place;
+    public String getName() {
+        return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 }

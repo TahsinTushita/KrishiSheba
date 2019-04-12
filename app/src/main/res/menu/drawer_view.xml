@@ -21,6 +21,10 @@
         <item
             android:title="@string/map_text"
             android:id="@+id/nav_map" />
+        <item
+            android:id="@+id/heatmap"
+            android:title="Heat Map"
+            />
         <item android:title="@string/seed_calculator_text"
             android:id="@+id/seed_calculator" />
         <item

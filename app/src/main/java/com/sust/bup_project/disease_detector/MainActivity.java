@@ -20,6 +20,7 @@ import com.sust.bup_project.Calculator.RevenueCalculator;
 import com.sust.bup_project.Calculator.SeedCalculatorFragment;
 import com.sust.bup_project.R;
 import com.sust.bup_project.community.CommunityFragment;
+import com.sust.bup_project.map.HeatMapActivity;
 import com.sust.bup_project.map.MapActivity;
 
 import java.util.List;
@@ -96,6 +97,11 @@ public class MainActivity extends AppCompatActivity implements FragmentDiseaseDe
                     case R.id.nav_map:
                         Intent intent = new Intent(MainActivity.this, MapActivity.class);
                         startActivity(intent);
+                        break;
+
+                    case R.id.heatmap:
+                        Intent intent1 = new Intent(MainActivity.this, HeatMapActivity.class);
+                        startActivity(intent1);
                         break;
                 }
                 return true;

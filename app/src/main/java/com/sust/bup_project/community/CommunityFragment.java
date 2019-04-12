@@ -23,7 +23,7 @@ import com.sust.bup_project.R;
 public class CommunityFragment extends Fragment {
 
     private EditText userNameEditText, passWordEditText;
-    private Button loginBtn;
+    private Button loginBtn,signUpBtn;
     private FirebaseAuth firebaseAuth;
 
     public CommunityFragment() {
@@ -41,6 +41,7 @@ public class CommunityFragment extends Fragment {
         findViews(view);
         if(firebaseAuth.getCurrentUser() == null) {
             loginBtn.setOnClickListener(loginBtnListener);
+            signUpBtn.setOnClickListener(signUpListener);
         } else  {
             String user = firebaseAuth.getCurrentUser().getEmail();
             user = user.substring(0, user.lastIndexOf('@')).trim();
@@ -54,8 +55,17 @@ public class CommunityFragment extends Fragment {
         loginBtn = view.findViewById(R.id.loginBtn);
         userNameEditText = view.findViewById(R.id.userNameEditText);
         passWordEditText = view.findViewById(R.id.passWordEditText);
+        signUpBtn = view.findViewById(R.id.RegBtn);
         firebaseAuth = FirebaseAuth.getInstance();
     }
+
+    View.OnClickListener signUpListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Fragment fragment = new SignUpFragment();
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.MainFragment,fragment).commit();
+        }
+    };
 
     View.OnClickListener loginBtnListener = new View.OnClickListener() {
         @Override

@@ -86,5 +86,6 @@ public class CommunityActivity extends AppCompatActivity {
     }
 
     public void onCreatePostClick(View view) {
+        startActivity(new Intent(CommunityActivity.this,CreatePostActivity.class));
     }
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sust.bup_project">
+    package="com.sust.iuttechfest">
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -28,12 +28,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".community.CreatePostActivity"></activity>
-        <activity android:name=".community.InsidePostActivity" />
-        <activity android:name=".community.CommunityActivity" />
-        <activity android:name=".map.MapActivity" />
-        <activity android:name=".map.HeatMapActivity"></activity>
-        <activity android:name=".disease_detector.MainActivity">
+        <activity android:name="com.sust.iuttechfest.community.CreatePostActivity"></activity>
+        <activity android:name="com.sust.iuttechfest.community.InsidePostActivity" />
+        <activity android:name="com.sust.iuttechfest.community.CommunityActivity" />
+        <activity android:name="com.sust.iuttechfest.map.MapActivity" />
+        <activity android:name="com.sust.iuttechfest.map.HeatMapActivity"></activity>
+        <activity android:name="com.sust.iuttechfest.disease_detector.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

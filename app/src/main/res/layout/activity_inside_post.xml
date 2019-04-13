@@ -12,6 +12,8 @@
         android:padding="10dp"
         android:text="@string/title"
         android:id="@+id/titleTextView"
+        android:textStyle="bold"
+        android:textSize="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -19,6 +21,7 @@
         android:id="@+id/usernameTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="19dp"
         android:padding="10dp"
         android:text="@string/title" />
 
@@ -27,6 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
+        android:layout_marginBottom="25dp"
         android:text="@string/title" />
     <android.support.v7.widget.RecyclerView
         android:id="@+id/postRecyclerView"
@@ -40,9 +44,12 @@
         android:orientation="horizontal">
 
         <EditText
+            android:layout_weight="1"
             android:id="@+id/discussionPostEditText"
-            android:layout_width="wrap_content"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
+            android:background="@drawable/bg"
+            android:layout_marginRight="15dp"
             android:hint="@string/create_a_post"
             android:padding="10dp" />
 
@@ -51,6 +58,7 @@
             android:id="@+id/discussionPostBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/bg"
             android:text="@string/post" />
     </LinearLayout>
 </LinearLayout>

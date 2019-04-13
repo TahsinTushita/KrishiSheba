@@ -9,8 +9,10 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
+import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -22,6 +24,7 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.HeterogeneousExpandableList;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -99,6 +102,7 @@ public class HeatMapActivity extends BaseDemoActivity {
     private LocationListener locationListener;
     RecyclerView recyclerView;
     PlacesAdapter adapter;
+    private ImageView mGps;
 
     private boolean mDefaultGradient = true;
     private boolean mDefaultRadius = true;
@@ -113,11 +117,13 @@ public class HeatMapActivity extends BaseDemoActivity {
     @Override
     protected void startDemo() {
         getMap().moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(20.8103,90.4125), 6));
-
+        placesArrayList = new ArrayList<>();
 //25 143
         cropsSearchText = findViewById(R.id.cropsHeatmapSearchtext);
         placesSearchText = findViewById(R.id.placesHeatmapSearchtext);
         recyclerView = findViewById(R.id.recyclerviewID);
+
+        mGps = (ImageView) findViewById(R.id.gpsid);
         cropsSearchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -149,6 +155,16 @@ public class HeatMapActivity extends BaseDemoActivity {
                 }
 
                 return false;
+            }
+        });
+
+        mGps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //getDeviceLocation();
+                getCurrentLocation();
+                placesArrayList.clear();
+                recyclerView.setVisibility(View.GONE);
             }
         });
 
@@ -254,7 +270,6 @@ public class HeatMapActivity extends BaseDemoActivity {
                 for(DataSnapshot snapshot:dataSnapshot.getChildren()){
                     Places places = snapshot.getValue(Places.class);
                     placesArrayList.add(places);
-                    Toast.makeText(HeatMapActivity.this,snapshot.toString(),Toast.LENGTH_SHORT).show();
                 }
                 if(placesArrayList.size()>0){
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(HeatMapActivity.this);
@@ -345,6 +360,106 @@ public class HeatMapActivity extends BaseDemoActivity {
             view = new View(activity);
         }
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    double latitude;
+    double longitude;
+
+    private MarkerOptions userMarker;
+    private Marker myMarker;
+
+    private void drawNearby() {
+
+        ArrayList<Address> addresses = new ArrayList<Address>();
+        String address = null;
+
+
+    }
+
+    private void getCurrentLocation(){
+
+        if (ActivityCompat.checkSelfPermission
+                (this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                &&
+                ActivityCompat.checkSelfPermission
+                        (this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        {
+
+
+        }
+        else {
+
+            // enable location buttons
+
+            // fetch last location if any from provider - GPS.
+            final LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+            final Location loc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            //if last known location is not available
+            if (loc == null) {
+
+                final LocationListener locationListener = new LocationListener() {
+                    @Override
+                    public void onLocationChanged(final Location location) {
+
+                        // getting location of user
+                        latitude = location.getLatitude();
+                        longitude = location.getLongitude();
+                        //do something with Lat and Lng
+                    }
+
+                    @Override
+                    public void onStatusChanged(String provider, int status, Bundle extras) {
+                    }
+
+                    @Override
+                    public void onProviderEnabled(String provider) {
+                        //when user enables the GPS setting, this method is triggered.
+                    }
+
+                    @Override
+                    public void onProviderDisabled(String provider) {
+                        //when no provider is available in this case GPS provider, trigger your gpsDialog here.
+                    }
+                };
+
+                //update location every 10sec in 500m radius with both provider GPS and Network.
+
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10*1000, 500, locationListener);
+                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 10000, 500, locationListener);
+            }
+            else {
+                //do something with last known location.
+                // getting location of user
+                latitude = loc.getLatitude();
+                longitude = loc.getLongitude();
+            }
+        }
+
+        if(userMarker == null) {
+            //mMap.addCircle(new CircleOptions().center(new LatLng(latitude,longitude)).radius(10000).strokeWidth(0f).fillColor(0xE6FFBEBE));
+
+            userMarker = new MarkerOptions().position(new LatLng(latitude, longitude)).title("Current Location");
+            myMarker = getMap().addMarker(userMarker);
+            myMarker.showInfoWindow();
+            //hs.put(myMarker,LoginActivity.user);
+        }
+        else {
+            myMarker.remove();
+
+            userMarker = new MarkerOptions().position(new LatLng(latitude, longitude)).title("Current Location");
+            getMap().clear();
+            //mMap.addCircle(new CircleOptions().center(new LatLng(latitude,longitude)).radius(10000).strokeWidth(0f).fillColor(0xE6FFBEBE));
+
+            myMarker = getMap().addMarker(userMarker);
+            myMarker.showInfoWindow();
+
+            //hs.put(myMarker,LoginActivity.user);
+        }
+        //Toast.makeText(this,"lat:"+latitude+" long:"+longitude,Toast.LENGTH_SHORT).show();
+        moveCamera(new LatLng(latitude, longitude),15f
+                , "my location");
+
+        drawNearby();
     }
 
 }

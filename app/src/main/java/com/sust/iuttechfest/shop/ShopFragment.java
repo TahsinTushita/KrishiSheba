@@ -106,7 +106,7 @@ public class ShopFragment extends Fragment {
     View.OnClickListener searchListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            String searchText = searchEditText.getText().toString().toLowerCase();
+            String searchText = searchEditText.getText().toString();
             doSearch(searchText);
         }
     };
@@ -114,7 +114,7 @@ public class ShopFragment extends Fragment {
     private void doSearch(String searchText) {
         shopItems.clear();
         DatabaseReference query = FirebaseDatabase.getInstance().getReference("Community/Shop/Posts");
-        query.orderByChild("price").equalTo(searchText);
+        query.orderByChild("title").startAt(searchText).endAt(searchText+"\uf8ff");
         query.addChildEventListener(queryChildEventListener);
     }
 

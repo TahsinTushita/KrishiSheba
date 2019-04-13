@@ -155,4 +155,5 @@ public class ShopFragment extends Fragment {
         shopRecyclerView = view.findViewById(R.id.shopRecyclerView);
     }
 
+
 }

@@ -81,7 +81,7 @@ public class CommunityActivity extends AppCompatActivity {
 
     public void onLogOutClick(View view) {
         FirebaseAuth.getInstance().signOut();
-        onBackPressed();
+        finish();
     }
 
     public void onCreatePostClick(View view) {

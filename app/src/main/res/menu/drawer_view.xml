@@ -14,8 +14,10 @@
             android:id="@+id/nav_shop"
             android:title="@string/shop_text"/>
         <item
+
             android:id="@+id/nav_chat_support"
-            android:title="@string/chatbot_text"/>
+            android:enabled="false"
+            android:title="@string/chatbot_text" />
     </group>
     <group android:id="@+id/nav_bottom" android:checkableBehavior="single">
         <item
@@ -27,8 +29,5 @@
             />
         <item android:title="@string/seed_calculator_text"
             android:id="@+id/seed_calculator" />
-        <item
-            android:title="@string/approx_production_text"
-            android:id="@+id/nav_approx_production" />
     </group>
 </menu>

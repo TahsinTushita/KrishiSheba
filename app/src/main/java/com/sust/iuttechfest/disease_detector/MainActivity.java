@@ -22,6 +22,7 @@ import com.sust.iuttechfest.R;
 import com.sust.iuttechfest.community.CommunityFragment;
 import com.sust.iuttechfest.map.HeatMapActivity;
 import com.sust.iuttechfest.map.MapActivity;
+import com.sust.iuttechfest.shop.ShopFragment;
 
 import java.util.List;
 
@@ -36,7 +37,8 @@ public class MainActivity extends AppCompatActivity implements FragmentDiseaseDe
     }
 
     private final String[] permissions = {
-                 "android.permission.ACCESS_NETWORK_STATE"
+                 "android.permission.ACCESS_NETWORK_STATE",
+                 "android.permission.SEND_SMS"
                 ,"android.permission.CAMERA"
                 ,"android.hardware.camera"
                 ,"android.hardware.camera.autofocus"
@@ -74,15 +76,13 @@ public class MainActivity extends AppCompatActivity implements FragmentDiseaseDe
                             getSupportFragmentManager().beginTransaction().replace(R.id.MainFragment, fragment).commit();
                         }
                         break;
+                    case R.id.nav_shop:
+                        fragment = new ShopFragment();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.MainFragment, fragment).commit();
+                        break;
                     case R.id.nav_detect:
                         if(!(fragment instanceof FragmentDiseaseDetector)) {
                             fragment = FragmentDiseaseDetector.getFragment();
-                            getSupportFragmentManager().beginTransaction().replace(R.id.MainFragment, fragment).commit();
-                        }
-                        break;
-                    case R.id.nav_approx_production:
-                        if(!(fragment instanceof RevenueCalculator)) {
-                            fragment = RevenueCalculator.getFragment();
                             getSupportFragmentManager().beginTransaction().replace(R.id.MainFragment, fragment).commit();
                         }
                         break;

@@ -40,6 +40,12 @@
     <string name="sign_up">Sign Up</string>
     <string name="crops_search">Search for crops</string>
     <string name="places_search">Seach for places</string>
+    <string name="postTitle">Title</string>
+    <string name="shopPhone">Phone No</string>
+    <string name="shopAddress">Address</string>
+    <string name="shopSeller">Seller</string>
+    <string name="shopQauntity">Quantity</string>
+    <string name="shopPrice">Price</string>
 
     <string-array name="crops_list">
         <item>potato</item>

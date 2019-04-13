@@ -94,10 +94,6 @@ public class MainActivity extends AppCompatActivity implements FragmentDiseaseDe
                         }
                         break;
 
-                    case R.id.nav_map:
-                        Intent intent = new Intent(MainActivity.this, MapActivity.class);
-                        startActivity(intent);
-                        break;
 
                     case R.id.heatmap:
                         Intent intent1 = new Intent(MainActivity.this, HeatMapActivity.class);

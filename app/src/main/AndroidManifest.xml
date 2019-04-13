@@ -29,12 +29,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.sust.iuttechfest.community.CreatePostActivity"></activity>
-        <activity android:name="com.sust.iuttechfest.community.InsidePostActivity" />
-        <activity android:name="com.sust.iuttechfest.community.CommunityActivity" />
-        <activity android:name="com.sust.iuttechfest.map.MapActivity" />
-        <activity android:name="com.sust.iuttechfest.map.HeatMapActivity"></activity>
-        <activity android:name="com.sust.iuttechfest.disease_detector.MainActivity">
+        <activity android:name=".shop.NewShop"></activity>
+        <activity android:name=".community.CreatePostActivity" />
+        <activity android:name=".community.InsidePostActivity" />
+        <activity android:name=".community.CommunityActivity" />
+        <activity android:name=".map.MapActivity" />
+        <activity android:name=".map.HeatMapActivity" />
+        <activity android:name=".disease_detector.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

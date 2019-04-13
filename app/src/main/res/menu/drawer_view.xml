@@ -13,16 +13,10 @@
         <item
             android:id="@+id/nav_shop"
             android:title="@string/shop_text"/>
-        <item
 
-            android:id="@+id/nav_chat_support"
-            android:enabled="false"
-            android:title="@string/chatbot_text" />
     </group>
     <group android:id="@+id/nav_bottom" android:checkableBehavior="single">
-        <item
-            android:title="@string/map_text"
-            android:id="@+id/nav_map" />
+
         <item
             android:id="@+id/heatmap"
             android:title="Heat Map"

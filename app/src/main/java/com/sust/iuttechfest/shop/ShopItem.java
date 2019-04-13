@@ -1,6 +1,8 @@
 package com.sust.iuttechfest.shop;
 
-public class ShopItem {
+import java.io.Serializable;
+
+public class ShopItem implements Serializable {
     private String seller;
     private String title;
     private String price;

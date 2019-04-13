@@ -9,9 +9,13 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -90,7 +94,11 @@ public class HeatMapActivity extends BaseDemoActivity {
     private ArrayList<Address> addresses;
     private Marker marker;
     private ArrayList<LatLng> cropsLatlngList;
-    Address address;
+    private Address address;
+    private LocationManager locationManager;
+    private LocationListener locationListener;
+    RecyclerView recyclerView;
+    PlacesAdapter adapter;
 
     private boolean mDefaultGradient = true;
     private boolean mDefaultRadius = true;
@@ -109,6 +117,7 @@ public class HeatMapActivity extends BaseDemoActivity {
 //25 143
         cropsSearchText = findViewById(R.id.cropsHeatmapSearchtext);
         placesSearchText = findViewById(R.id.placesHeatmapSearchtext);
+        recyclerView = findViewById(R.id.recyclerviewID);
         cropsSearchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -117,6 +126,7 @@ public class HeatMapActivity extends BaseDemoActivity {
                         || event.getAction() == KeyEvent.ACTION_DOWN
                         || event.getAction() == KeyEvent.KEYCODE_ENTER) {
 
+                    recyclerView.setVisibility(View.GONE);
                     searchCrops();
                     hideSoftKeyboard(HeatMapActivity.this);
                 }
@@ -150,6 +160,11 @@ public class HeatMapActivity extends BaseDemoActivity {
 
                 marker.showInfoWindow();
 
+                if(placesArrayList.size()>0)
+                    recyclerView.setVisibility(View.VISIBLE);
+                else
+                    recyclerView.setVisibility(View.GONE);
+
                 return false;
             }
         });
@@ -158,6 +173,7 @@ public class HeatMapActivity extends BaseDemoActivity {
 
 
     public void searchCrops(){
+        recyclerView.setVisibility(View.GONE);
         cropsSearchString = cropsSearchText.getText().toString().toLowerCase();
         cropsArrayList = new ArrayList<>();
         addresses = new ArrayList<>();
@@ -227,6 +243,7 @@ public class HeatMapActivity extends BaseDemoActivity {
         placesSearchString = placesSearchText.getText().toString().toLowerCase();
         placesArrayList = new ArrayList<>();
         addresses = new ArrayList<>();
+        adapter = new PlacesAdapter(HeatMapActivity.this,placesArrayList);
 
         placesDatabase = FirebaseDatabase.getInstance().getReference("Places");
         placesDatabaseQuery = placesDatabase.orderByKey().equalTo(placesSearchString);
@@ -238,6 +255,13 @@ public class HeatMapActivity extends BaseDemoActivity {
                     Places places = snapshot.getValue(Places.class);
                     placesArrayList.add(places);
                     Toast.makeText(HeatMapActivity.this,snapshot.toString(),Toast.LENGTH_SHORT).show();
+                }
+                if(placesArrayList.size()>0){
+                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(HeatMapActivity.this);
+                    recyclerView.setLayoutManager(layoutManager);
+                    recyclerView.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                    //recyclerView.setVisibility(View.VISIBLE);
                 }
             }
 

@@ -31,6 +31,14 @@ public class ShopViewHolder extends RecyclerView.ViewHolder {
         Picasso.get().load(shopItem.getImageuri()).fit().into(item_image);
     }
 
-    public void bind(ShopItemListener itemListener, ShopItem shopItem) {
+    public void bind(final ShopItemListener itemListener, final ShopItem shopItem) {
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                itemListener.onPostClick(shopItem);
+
+            }
+        });
     }
 }

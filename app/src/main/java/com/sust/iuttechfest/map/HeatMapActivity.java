@@ -1,20 +1,33 @@
 package com.sust.iuttechfest.map;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.HeterogeneousExpandableList;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.TileOverlay;
 import com.google.android.gms.maps.model.TileOverlayOptions;
 import com.google.firebase.database.ChildEventListener;
@@ -64,13 +77,20 @@ public class HeatMapActivity extends BaseDemoActivity {
     private HeatmapTileProvider mProvider;
     private TileOverlay mOverlay;
     private EditText cropsSearchText;
+    private EditText placesSearchText;
+    private String placesSearchString;
     private String cropsSearchString;
+    private DatabaseReference placesDatabase;
+    private Query placesDatabaseQuery;
+    private ArrayList<Places> placesArrayList;
     private DatabaseReference cropsDatabase;
     private Query cropsDatabaseQuery;
     private Geocoder geocoder;
     private ArrayList<Crops> cropsArrayList;
     private ArrayList<Address> addresses;
+    private Marker marker;
     private ArrayList<LatLng> cropsLatlngList;
+    Address address;
 
     private boolean mDefaultGradient = true;
     private boolean mDefaultRadius = true;
@@ -88,6 +108,7 @@ public class HeatMapActivity extends BaseDemoActivity {
 
 //25 143
         cropsSearchText = findViewById(R.id.cropsHeatmapSearchtext);
+        placesSearchText = findViewById(R.id.placesHeatmapSearchtext);
         cropsSearchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -96,15 +117,47 @@ public class HeatMapActivity extends BaseDemoActivity {
                         || event.getAction() == KeyEvent.ACTION_DOWN
                         || event.getAction() == KeyEvent.KEYCODE_ENTER) {
 
-                    searchPlaces();
+                    searchCrops();
                     hideSoftKeyboard(HeatMapActivity.this);
                 }
                 return false;
             }
         });
+
+        placesSearchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+
+                if (actionId == EditorInfo.IME_ACTION_SEARCH
+                        || actionId == EditorInfo.IME_ACTION_DONE
+                        || event.getAction() == KeyEvent.ACTION_DOWN
+                        || event.getAction() == KeyEvent.KEYCODE_ENTER) {
+
+                    geolocate();
+                    searchPlaces();
+                    hideSoftKeyboard(HeatMapActivity.this);
+                }
+
+                return false;
+            }
+        });
+
+        getMap().setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            Drawable drawable;
+            String title;
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+
+                marker.showInfoWindow();
+
+                return false;
+            }
+        });
+
     }
 
-    public void searchPlaces(){
+
+    public void searchCrops(){
         cropsSearchString = cropsSearchText.getText().toString().toLowerCase();
         cropsArrayList = new ArrayList<>();
         addresses = new ArrayList<>();
@@ -167,6 +220,96 @@ public class HeatMapActivity extends BaseDemoActivity {
 
             }
         });
+        moveCam(new LatLng(20.8103,90.4125),5f);
+    }
+
+    public void searchPlaces(){
+        placesSearchString = placesSearchText.getText().toString().toLowerCase();
+        placesArrayList = new ArrayList<>();
+        addresses = new ArrayList<>();
+
+        placesDatabase = FirebaseDatabase.getInstance().getReference("Places");
+        placesDatabaseQuery = placesDatabase.orderByKey().equalTo(placesSearchString);
+        placesDatabaseQuery.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                placesArrayList.clear();
+                for(DataSnapshot snapshot:dataSnapshot.getChildren()){
+                    Places places = snapshot.getValue(Places.class);
+                    placesArrayList.add(places);
+                    Toast.makeText(HeatMapActivity.this,snapshot.toString(),Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    public void geolocate(){
+        getMap().clear();
+        placesSearchString = placesSearchText.getText().toString().toLowerCase();
+        geocoder = new Geocoder(HeatMapActivity.this);
+        addresses = new ArrayList<>();
+        try {
+            getMap().clear();
+            addresses = (ArrayList<Address>) geocoder.getFromLocationName(placesSearchString, 1);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (addresses.size() > 0) {
+            address = addresses.get(0);
+            //Toast.makeText(MapActivity.this, address.toString(), Toast.LENGTH_SHORT).show();
+            moveCamera(new LatLng(address.getLatitude(), address.getLongitude()), 15f ,address.getAddressLine(0));
+
+        }
+    }
+
+    public void moveCamera(LatLng latLng,float zoom,String title){
+        getMap().moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        //mMap.setMyLocationEnabled(true);
+        //mMap.getUiSettings().setMyLocationButtonEnabled(false);
+
+        if (!title.equals("my location")) {
+            MarkerOptions options = new MarkerOptions()
+                    .position(latLng)
+                    .title(title);
+            marker = getMap().addMarker(options);
+        }
+        hideSoftKeyboard(HeatMapActivity.this);
+    }
+
+    public void moveCam(LatLng latLng,float zoom){
+        getMap().moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,zoom));
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+
+        hideSoftKeyboard(HeatMapActivity.this);
     }
 
     private static void hideSoftKeyboard(Activity activity) {

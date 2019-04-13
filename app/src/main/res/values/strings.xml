@@ -39,6 +39,7 @@
     <string name="enter_phone_number">Enter Phone Number</string>
     <string name="sign_up">Sign Up</string>
     <string name="crops_search">Search for crops</string>
+    <string name="places_search">Seach for places</string>
 
     <string-array name="crops_list">
         <item>potato</item>
